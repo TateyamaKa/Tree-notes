@@ -1,2 +1,2 @@
 # Tree-notes
-notes on decision trees
+notes on machine learning
