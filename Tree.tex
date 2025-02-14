@@ -479,6 +479,25 @@ To impliment adaboost in regression tree,we only need to update some details fro
 \textcolor{blue}{Then normalize the sample weight as usual.}
 
 (v)The prediction will be$$\textcolor{red}{\sum_{s=1}^{n}w_s T_s(x)}$$where $w_s$ is the weight of $tree_s$ and $T_s(x)$ is the output of $tree_s$
-\section{Gradient boost}
-Updating
+\section{Gradient Boost}
+\subsection{regression}
+We impliment Gradient Boost of regression part by the following procedure
+
+(i)Initialize zeroth prediction by setting it to be average of all observed values from sample set.
+
+(ii)calculate the residuals and build a tree consist of from 8 to 32 leaves with output value taken to be$$\textcolor{red}{\frac{\sum Residual}{Number\;of\;Residuals}}$$where the sum is defined over in each leaf.
+
+(iii)updata the prediction for each sample by letting it go through the built tree and gain its output value,then$$\textcolor{red}{prediction\rightarrow prediction+\eta\times output}$$where $\eta$ is the learning rate.
+
+(iv)update the residuals and go through step (ii) to step (iv).
+
+(v)make prediction for new data using the sequence of trees we've built.Let $T_i$ be the output value if the data goes through $i^{th}$ tree,then we write$$\textcolor{red}{prediction=zeroth\;prediction+\sum_{i=i}^{n}\eta\times T_i}$$where n counts the number of trees we built.
+\subsection{classification}
+To make Gradient Boost works for classification,we need to do some updates.
+
+(i)Initilization now becomes $$\textcolor{red}{[log(odds)]_0=\frac{\#\;Category\;1}{\#\;Category\;0}}$$
+
+(ii)output value is now $$\textcolor{red}{\frac{\sum Residual}{\sum Previous\;Probability\times(1-Previous\;Probability)}}$$like what we have in XGboost.
+
+(iii)predictions are now logorithm of the odds,so we need to convert them into probability by substuting them in sigmoid function.
 \end{document}
